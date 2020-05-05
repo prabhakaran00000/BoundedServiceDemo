@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.baatu.servicedemo.viewmodel.HomeViewModel"/>
+        <variable
+            name="isVisible"
+            type="boolean"/>
+        <variable
+            name="networkStatus"
+            type="String"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.HomeActivity">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/network_status_top_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{networkStatus ?? @string/welcome}"
+            android:padding="@dimen/text_padding_16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/network_status_top_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{networkStatus ?? @string/welcome}"
+            android:padding="@dimen/text_padding_16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/network_status_bottom_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{networkStatus ?? @string/welcome}"
+            android:padding="@dimen/text_padding_16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/network_status_bottom_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{networkStatus ?? @string/welcome}"
+            android:padding="@dimen/text_padding_16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textColor="?attr/colorOnPrimary"
+            android:backgroundTint="?attr/colorPrimary"
+            android:visibility="@{isVisible? View.GONE : View.VISIBLE}"
+            android:text="@string/start"
+            android:onClick="@{viewModel::onStartButtonClick}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{isVisible? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@+id/network_status_top_left"
+            app:layout_constraintBottom_toTopOf="@+id/network_status_bottom_left"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
